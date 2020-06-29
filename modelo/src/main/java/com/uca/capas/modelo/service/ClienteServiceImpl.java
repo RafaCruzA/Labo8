@@ -244,4 +244,9 @@ public class ClienteServiceImpl implements ClienteService {
 	public void updateCliente(Cliente c) {
 		clienteDao.updateCliente(c);
 	}
+	
+	@Override
+	public int ejecutarProcJdbc(Integer cliente, Boolean estado) {
+		return clienteDao.ejecutarProcedimientoJdbc(cliente, estado);
+	}
 }

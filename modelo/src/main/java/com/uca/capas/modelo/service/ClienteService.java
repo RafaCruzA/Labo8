@@ -47,5 +47,7 @@ public interface ClienteService {
 	public int insertClienteAutoId(Cliente c);
 	
 	public void updateCliente(Cliente c);
+	
+	public int ejecutarProcJdbc(Integer cliente, Boolean estado);
 
 }
