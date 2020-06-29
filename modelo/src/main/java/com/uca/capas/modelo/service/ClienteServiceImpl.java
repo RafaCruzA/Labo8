@@ -234,4 +234,14 @@ public class ClienteServiceImpl implements ClienteService {
 
 		return clientes;
 	}
+	
+	@Override
+	public int insertClienteAutoId(Cliente c) {
+		return clienteDao.insertClienteAutoId(c);		
+	}
+	
+	@Override
+	public void updateCliente(Cliente c) {
+		clienteDao.updateCliente(c);
+	}
 }
