@@ -29,4 +29,7 @@ public interface ClienteDAO {
 	
 	public int ejecutarProcedimientoJdbc(Integer cliente, Boolean estado);
 	
+	public int [][] batchInsertVehiculos(final List<Vehiculo> vehiculos);
+	
+	
 }

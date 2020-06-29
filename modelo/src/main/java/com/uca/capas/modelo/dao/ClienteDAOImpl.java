@@ -107,6 +107,26 @@ public class ClienteDAOImpl implements ClienteDAO {
 	}
 	
 	
+	public int[][] batchInsertVehiculos(List<Vehiculo> vehiculos) {
+		String sql = "INSERT INTO store.vehiculo " + "(c_vehiculo, s_marca, s_modelo, s_chassis, f_compra, b_estado, c_cliente) VALUES (?,?,?,?,?,?,?)";
+		
+		int [][] resultado = jdbcTemplate.batchUpdate(sql, vehiculos, 1000, new ParameterizedPreparedStatementSetter<Vehiculo>(){
+			@Override
+			public void setValues(PreparedStatement ps, Vehiculo v) throws SQLException{
+				ps.setInt(1, v.getCvehiculo());
+				ps.setString(2, v.getSmarca());
+				ps.setString(3, v.getSmodelo());
+				ps.setString(4, v.getSchassis());
+				java.sql.Date fcompra = new java.sql.Date(v.getFcompra().getTime().getTime());
+				ps.setDate(5, fcompra);
+				ps.setBoolean(6, v.getBestado());
+				ps.setInt(7, v.getCcliente());
+			}
+		});
+		return resultado;
+	}
+	
+	
 	@PersistenceContext(unitName = "modelo-persistence")
 	EntityManager entityManager;
 	
