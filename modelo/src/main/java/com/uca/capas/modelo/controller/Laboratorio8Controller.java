@@ -1,5 +1,8 @@
 package com.uca.capas.modelo.controller;
 
+
+import java.text.ParseException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.validation.Valid;
@@ -81,6 +84,19 @@ public class Laboratorio8Controller {
 		Integer resultado;
 		resultado = clienteService.ejecutarProcJdbc(cliente, estado);
 		mav.addObject("resultado", resultado);
+		mav.setViewName("Laboratorio/resultado");
+		return mav;
+	}
+	
+	//INSERCION BATCH
+	@RequestMapping("/batchVehiculo")
+	public ModelAndView insercionBatch() throws ParseException{
+		ModelAndView mav = new ModelAndView();
+		long startTime = System.nanoTime();
+		clienteService.cargaMasiva();
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime) / 1000000;
+		logger.log(Level.INFO, "Duracion del metodo -> {0} milisegundos", duration);
 		mav.setViewName("Laboratorio/resultado");
 		return mav;
 	}
