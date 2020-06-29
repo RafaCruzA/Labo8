@@ -45,6 +45,39 @@ public class ClienteDAOImpl implements ClienteDAO {
 	 * con la propiedad unitName, con esto tenemos el objeto EntityManager
 	 * de la base de datos definida en nuestra clase de configuracion de Jpa
 	 */
+	
+	//JDBC
+	@Autowired
+	JdbcTemplate jdbcTemplate;
+	
+	@Override
+	public int insertClienteAutoId(Cliente c) {
+		// TODO Auto-generated method stub
+		SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate)
+				.withSchemaName("store")
+				.withTableName("cliente")
+				.usingGeneratedKeyColumns("c_cliente");
+		
+		//Valores del insert
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("s_nombres", c.getSnombres());
+		parametros.put("s_apellidos", c.getSapellidos());
+		parametros.put("f_nacimiento", c.getFnacimiento());
+		parametros.put("b_activo", c.getBactivo());
+		
+		//El metodo executeAndReturnKey devuelve la llave primaria generada en el insert 
+		Number id_generated = jdbcInsert.executeAndReturnKey(parametros);
+		
+		return id_generated.intValue();	
+	}
+	
+	private static final String sql = "UPDATE store.cliente SET s_nombres = ?, s_apellidos = ?, f_nacimiento = ?, b_activo = ? WHERE c_cliente = ?";
+	@Override
+	public void updateCliente(Cliente c) {
+		Object[] parametros = new Object[] {c.getSnombres(), c.getSapellidos(), c.getFnacimiento(), c.getBactivo(), c.getCcliente()};
+		jdbcTemplate.update(sql, parametros);
+	}
+	
 	@PersistenceContext(unitName = "modelo-persistence")
 	EntityManager entityManager;
 	

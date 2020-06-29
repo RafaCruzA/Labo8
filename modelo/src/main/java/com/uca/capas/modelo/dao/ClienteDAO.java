@@ -23,4 +23,8 @@ public interface ClienteDAO {
 
 	public List<Cliente> getClientesFechaEstado(Calendar fecha, Boolean estado);
 	
+	public int insertClienteAutoId(Cliente c);
+	
+	public void updateCliente(Cliente c);
+	
 }
