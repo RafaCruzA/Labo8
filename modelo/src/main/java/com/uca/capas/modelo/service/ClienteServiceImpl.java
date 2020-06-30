@@ -258,7 +258,8 @@ public class ClienteServiceImpl implements ClienteService {
 	}
 	
 	public List<Vehiculo> prepararColeccion() throws ParseException{
-		String csv = "C:\\Users\\rafae\\Documents\\Laboratorio-8-PNC-master\\vehiculos.csv";
+		
+		String csv = "C:\\Users\\rafae\\Documents\\Laboratorio-8-PNC-master\\vehiculos.csv"; //Colocar en esta linea la dirección del archivo vehiculos.csv
 		
 		List<Vehiculo> coleccion = new ArrayList<Vehiculo>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
